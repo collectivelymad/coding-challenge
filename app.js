@@ -6,7 +6,8 @@ var http = require('http').Server(app);
 
 app.get('/', function(req, res)
 {
-    res.send('hello');
+    res.sendFile(__dirname + '/views/index.html');
+ 
 });
 
 http.listen(3000, function(){
