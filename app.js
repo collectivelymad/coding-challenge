@@ -1,5 +1,8 @@
 //storing values in mongodb
 var mongodb = require("mongoose");
+var app = require('express')();
+var http = require('http').Server(app);
+
 
 console.log("starting");
 
@@ -9,13 +12,23 @@ var port = process.env.PORT || 3000;
 var server = require('http').createServer();
 var io = require('socket.io')(server);
 
-io.on('connection', function (socket) {    
+
+
+app.get('/', function(req, res)
+{
+    res.sendFile(__dirname + '/views/index.html');
+
+});
+
+
+
+io.on('connection', function (socket) {
     console.log("connected");
 
     socket.contents = "test";
-    
+
     socket.on('event', function (data) {
-        console.log("event");            
+        console.log("event");
     });
     socket.on('disconnect', function () {
         console.log("Disconnected");
