@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/collectivelymad/coding-challenge#readme",
   "dependencies": {
+    "bootstrap": "^3.3.6",
     "express": "^4.13.3",
     "kerberos": "0.0.17",
     "mongoose": "^4.3.4",

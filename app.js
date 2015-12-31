@@ -3,23 +3,30 @@ var mongodb = require("mongoose");
 var app = require('express')();
 var http = require('http').Server(app);
 
-
 console.log("starting");
 
 //set port from environment
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 5000;
 
-var server = require('http').createServer();
-var io = require('socket.io')(server);
+var io = require('socket.io')(http);
 
-
+console.log(port);
 
 app.get('/', function(req, res)
 {
     res.sendFile(__dirname + '/views/index.html');
-
 });
 
+
+app.get('/history', function(req, res)
+{
+    res.sendFile(__dirname + '/views/history.html');
+});
+
+app.get('/repplay', function(req, res)
+{
+    res.sendFile(__dirname + '/views/replay.html');
+});
 
 
 io.on('connection', function (socket) {
@@ -34,6 +41,7 @@ io.on('connection', function (socket) {
         console.log("Disconnected");
     });
 });
-server.listen(port);
+
+http.listen(port);
 
 
