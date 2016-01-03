@@ -2,6 +2,7 @@
 var mongodb = require("mongoose");
 var app = require('express')();
 var http = require('http').Server(app);
+var path = require('path');
 
 console.log("starting");
 
@@ -9,6 +10,8 @@ console.log("starting");
 var port = process.env.PORT || 5000;
 
 var io = require('socket.io')(http);
+
+app.use(app.static(path.resolve(__dirname, 'public')));
 
 console.log(port);
 
