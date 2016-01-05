@@ -1,0 +1,49 @@
+html, body {
+    background-color: black;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#board {
+
+    display: block;
+}
+
+.board-title {
+    font-weight: bold;
+    color: #cccccc;
+}
+
+#welcome {
+    height: 100%;
+    width: 100%;
+    display: none;
+}
+
+.title {
+    font-family: sans-serif;
+    font-weight: 200;
+    position: absolute;
+    height: 50%;
+    width: 96%;
+    margin: auto;
+    bottom: 0;
+    left: 0;
+    top: 0;
+    right: 0;
+}
+
+.gamepiece {
+    width: 99%;
+    height: 99%;
+
+}
+
+.tile {
+    border: 1px black solid;
+    width: 33%;
+    height: 33%;
+    background-color: white;
+}

@@ -1,0 +1,48 @@
+//new game
+//creates a new game with player one and notfities client of state.  State == "waiting for player 2"
+game.createGame(player1);
+
+describe("When creating a new game", function() {
+    it("should have a state of waiting for player2", function(){
+
+        game.createGame();
+
+        expect(game.state).toBe("Waiting for player 2.");
+    })
+
+});
+
+
+
+
+
+
+game.addPlayer(player2);  when second player is added, game state goes to ready
+
+game.winner() // TBD, tie, player1 winner, player2 winner
+
+//this is the state of the game, waiting for player 2, started, in progress, completed
+game.state()//connects the second player to the pending game
+
+
+game.boardstate();
+{  "turn": "ns|p1|p2|c",
+                          "board": [[0,0,0],[0,0,0],[0,0,0]] }
+
+
+game.takeTurn(player, position);
+
+game.score();
+
+game.endGame();
+
+game.save();
+
+game.plays = [ turn1, turn2 ];
+
+turn1 = "board": [[0,0,0],[0,0,0],[0,0,0]]
+
+game.turn() -> counter for the game for number of plays, determine player
+
+//
+game.replay(gameid, turnDelay);
