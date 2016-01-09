@@ -23,12 +23,12 @@ describe('When creating a new game', function() {
     beforeEach(function()
     {
         console.log('called before each.');
-    });
+    }),
 
     afterEach(function(){
         console.log('called after each.')
 
-    });
+    }),
 
     it("should have a state of waiting for player2", function(){
         game.createGame();

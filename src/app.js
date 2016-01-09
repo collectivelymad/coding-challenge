@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var path = require('path');
+var game = require('./game');
 
 var mongoCS = 'mongodb://tictac_user:tictactoe123@ds039185.mongolab.com:39185/md_tictactoe';
 
@@ -32,7 +33,7 @@ app.get('/history', function(req, res)
     res.sendFile(__dirname + '/views/history.html');
 });
 
-app.get('/repplay', function(req, res)
+app.get('/replay', function(req, res)
 {
     res.sendFile(__dirname + '/views/replay.html');
 });
@@ -41,11 +42,13 @@ app.get('/repplay', function(req, res)
 io.on('connection', function (socket) {
     console.log('connected');
 
+    socket.emit('gamefound', 1, '124124'  );
     socket.contents = 'test';
 
     socket.on('event', function (data) {
         console.log('event');
     });
+
 
 
     socket.on('playturn', function (data) {
