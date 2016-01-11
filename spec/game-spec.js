@@ -18,19 +18,23 @@ var game = require("../src/game");
 //});
 
 
-describe('When creating a new game', function() {
+describe('When creating a new game', function () {
 
-    beforeEach(function()
-    {
+    beforeEach(function () {
         console.log('called before each.');
     }),
 
-    afterEach(function(){
+    afterEach(function () {
         console.log('called after each.')
 
     }),
 
-    it("should have a state of waiting for player2", function(){
+    it("should have a state of waiting for player2", function () {
+        game.createGame();
+        expect(game.state).toBe('Waiting for player 2.');
+    }),
+
+    it("should have a uuid as the game id", function () {
         game.createGame();
         expect(game.state).toBe('Waiting for player 2.');
     })

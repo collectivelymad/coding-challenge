@@ -8,7 +8,7 @@ module.exports = function (grunt) {
             all: {
                 script: __dirname + '/src/app.js',
                 options: {
-                    watchesExtensions: ['js']
+                    watchesExtensions: ['js', 'vash']
                 }
             }
         }

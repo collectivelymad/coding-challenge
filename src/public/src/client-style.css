@@ -11,6 +11,11 @@ html, body {
     display: block;
 }
 
+#board-row {
+
+    display: block;
+}
+
 .board-title {
     font-weight: bold;
     color: #cccccc;
@@ -34,6 +39,22 @@ html, body {
     top: 0;
     right: 0;
 }
+
+.largetext {
+    font-weight: bold;
+    font-size: xx-large;
+    font-family: sans-serif;
+}
+
+.historybody
+{
+    width: 99%;
+    height: 99%;
+    background-color: white;
+
+}
+
+
 
 .gamepiece {
     width: 99%;

@@ -1,0 +1,33 @@
+@html.extend('layout', function(model){
+
+@html.block('content', function(model){
+    <div class="container historybody">
+        <p class="jumbotron largetext">Game History</P>
+        <table class="table table-hover" id="table">
+            <thead>
+                <tr>
+                    <th>GameId</th>
+                    <th>Winner</th>
+                    <th>Watch Game</th>
+                </tr>
+            </thead>
+            <tbody>
+            @model.gameList.forEach(function(game){
+            <tr>
+                <td>
+                    @game.gameId
+                </td>
+                <td>
+                    @game.status
+                </td>
+                      <td>
+                    <a href="./replay/@game.gameId">Start</a>
+                </td>
+            </tr>
+            })
+            </tbody>
+         </table>
+    </div>
+})
+
+})

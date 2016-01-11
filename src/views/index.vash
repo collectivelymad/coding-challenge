@@ -1,0 +1,57 @@
+@html.extend('layout', function(model){
+    @html.block('content', function(model){
+        <div class="container title" id="welcome">
+            <div class="jumbotron">
+                Finding an opponent...
+            </div>
+        </div>
+
+        <div class="container" id="board">
+              <h1 class="board-title">Game On!!</h1>
+                <div class="row board-row">
+                    <span id="c1_1" class="col-xs-4 col-sm-4 col-md-4 tile">
+                        <img class="gamepiece" src="/img/empty.png" onclick="playTurn(1,1);"/>
+                    </span>
+                    <span id="c1_2" class="col-xs-4 col-sm-4 col-md-4 tile">
+                        <img class="gamepiece" src="/img/empty.png" onclick="playTurn(1,2);"/>
+                    </span>
+                    <span id="c1_3" class="col-xs-4 col-sm-4 col-md-4 tile">
+                        <img class="gamepiece" src="/img/empty.png" onclick="playTurn(1,3);"/>
+                    </span>
+                </div>
+                <div class="row board-row">
+                    <span id="c2_1" class="col-xs-4 col-sm-4 col-md-4 tile">
+                        <img class="gamepiece" src="/img/empty.png" onclick="playTurn(2,1);"/>
+                    </span>
+                    <span id="c2_2" class="col-xs-4 col-sm-4 col-md-4 tile">
+                        <img class="gamepiece" src="/img/empty.png" onclick="playTurn(2,2);"/>
+                    </span>
+                    <span id="c2_3" class="col-xs-4 col-sm-4 col-md-4 tile">
+                        <img class="gamepiece" src="/img/empty.png" onclick="playTurn(2,3);"/>
+                    </span>
+                </div>
+                <div class="row board-row">
+                    <span id="c3_1" class="col-xs-4 col-sm-4 col-md-4 tile">
+                        <img class="gamepiece" src="/img/empty.png" onclick="playTurn(3,1);"/>
+                    </span>
+                    <span id="c3_2" class="col-xs-4 col-sm-4 col-md-4 tile">
+                        <img class="gamepiece" src="/img/empty.png" onclick="playTurn(3,2);"/>
+                    </span>
+                    <span id="c3_3" class="col-xs-4 col-sm-4 col-md-4 tile">
+                        <img class="gamepiece" src="/img/empty.png" onclick="playTurn(3,3);"/>
+                    </span>
+                </div>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+                integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+                crossorigin="anonymous"></script>
+
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="./src/client-app.js"></script>
+        })
+
+
+
+})

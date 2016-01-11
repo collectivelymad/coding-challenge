@@ -35,13 +35,15 @@
     }
 
 
-    game.createGame = function (server) {
+    game.createGame = function (gameId, socketId, next) {
         board = [
             [0, 0, 0],
             [0, 0, 0],
             [0, 0, 0]];
 
         gameid = uuid.v4();
+
+    //    next(err, this);
 
     }
 
@@ -52,7 +54,7 @@
             gameid = new uuid();
         } else if (player1) {
             player2 = socket.id;
-            socket.broadcast.to(gameid).emit("startGame", {gameid: gameid, player1: player1, player2: player2, board: board});
+            socket.broadcast.to(gameid).emit("startGame", {gameId: gameid, player1: player1, player2: player2, board: board});
         }
     }
 
