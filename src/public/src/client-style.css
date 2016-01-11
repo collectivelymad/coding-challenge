@@ -8,8 +8,10 @@ html, body {
 
 #board {
 
-    display: block;
+    display: none;
 }
+
+#tie, #win, #lose { display:none;}
 
 #board-row {
 
@@ -24,7 +26,7 @@ html, body {
 #welcome {
     height: 100%;
     width: 100%;
-    display: none;
+    display: block;
 }
 
 .title {

@@ -20,27 +20,16 @@ var mongoCS = 'mongodb://tictac_user:tictactoe123@ds039185.mongolab.com:39185/md
 
 mongoose.connect(mongoCS);
 
-
 var db = mongoose.connection;
+
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
     // we're connected!
     console.log("database connected");
-    var gameSchema = mongoose.Schema({
-        gameId: String,
-        moves: [],
-        finalBoard: [],
-        winner: String,
-        player1: String,
-        player2: String
-    });
-
-    var completedGame = mongoose.model('game', gameSchema);
-
-
 });
 
-
+//initialize the tracker to watch for connections
+gameTracker.init(io);
 
 //set public folder up to serve static files
 app.use(express.static(path.resolve(__dirname, 'public')));
@@ -54,7 +43,6 @@ app.set('views', path.join( __dirname, '/views') );
 app.get('/', function(req, res)
 {
     res.render('index', null);
-   // res.sendFile(__dirname + '/views/index.html');
 });
 
 //using vash to provide dynamic template
@@ -74,55 +62,10 @@ app.get('/replay', function(req, res)
 });
 
 
-io.on('connection', function (socket) {
-    console.log('connected');
-
-    if (gameTracker.pendingGame) {
-        //connect to game if there is one waiting
-
-        gameTracker.pendingGame = null;
-
-    } else {
-        //create game if there wasn't
-        var newGameId = uuid.v4();
-        //var newGame = game;
-        //newGame.createGame(newGameId, socket.id, function(game){
-        //    gameTracker.pendingGame = newGameId;
-        //    gameTracker.addGame(newGame);
-        //
-        //
-        //});
-
-    }
-
-    socket.emit('gameFound', 1, '124124'  );
-    socket.contents = 'test';
-
-    socket.on('event', function (data) {
-        console.log('event');
-    });
-
-
-
-    socket.on('playTurn', function (data) {
-        console.log('playTurn');
-    });
-
-    socket.on('disconnect', function () {
-        console.log('Disconnected');
-    });
-});
-
+console.log();
 console.log('http://localhost:' + port);
-//
-//var GameInstance = require('./gameclasstest');
-//var bob = new GameInstance('player1');
-//
-//
-//bob.winner = "player 1";
-//
-//console.log(bob.winner);
-//
+console.log();
+
 
 http.listen(port);
 
