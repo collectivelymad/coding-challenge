@@ -4,7 +4,7 @@
   "description": "tic-tac-toe coding challenge in node",
   "main": "/src/app.js",
   "scripts": {
-    "test": "grunt test",
+    "test": "grunt jasmine",
     "start": "/src/app.js"
   },
   "repository": {
@@ -24,7 +24,6 @@
   "dependencies": {
     "bootstrap": "^3.3.6",
     "express": "^4.13.3",
-    "grunt": "^0.4.5",
     "kerberos": "0.0.17",
     "mongoose": "^4.3.5",
     "node-uuid": "^1.4.7",

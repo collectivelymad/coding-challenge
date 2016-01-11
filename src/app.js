@@ -67,11 +67,11 @@ app.get('/history', function(req, res)
         });
 });
 
-//app.get('/replay', function(req, res)
-//{
-//    console.log(req);
-//    res.sendFile(__dirname + '/views/replay.vash');
-//});
+app.get('/replay', function(req, res)
+{
+    console.log(res);
+    res.render('replay', null);
+});
 
 
 io.on('connection', function (socket) {

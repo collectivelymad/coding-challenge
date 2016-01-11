@@ -20,8 +20,8 @@ function GameInstance(gameId){
 GameInstance.prototype.createGame = function(playerId) {
     this.player1 = playerId;
 
-}
+};
 
 GameInstance.prototype.startGame = function(player2){
     this.player2 = player2;
-}
+};
