@@ -27,19 +27,6 @@ function GameInstance(player1) {
 }
 
 
-GameInstance.prototype.startGame = function (player2, next) {
-    this.player2 = player2;
-    this._gameState = "Player1 Turn";
-
-    //set up board state
-
-
-    console.log(this._board);
-
-    next(this);
-};
-
-
 GameInstance.prototype.playTurn = function (data, playerId, next) {
 
     var gamePiece = 0;
@@ -62,14 +49,14 @@ GameInstance.prototype.playTurn = function (data, playerId, next) {
         //this.checkScore(2, next);
     }
 
-    this.checkScore(gamePiece, next);
+    this.checkScore( { gamePiece: gamePiece, playerId: playerId}, next);
 
 
 };
 
 
-GameInstance.prototype.checkScore = function(playerId, next){
-    console.log("checkScore " + playerId);
+GameInstance.prototype.checkScore = function(player, next){
+    console.log("checkScore " + player.playerId);
     var matches = 0;
     var winPatterns = [
         [{x: 1, y: 1}, {x: 1, y: 2}, {x: 1, y: 3}],
@@ -87,9 +74,9 @@ GameInstance.prototype.checkScore = function(playerId, next){
 
         var winPattern = winPatterns[i];
 
-        if(this._board[winPatterns[i][0].x-1][winPattern[0].y-1] == playerId &&
-            this._board[winPattern[1].x-1][winPattern[1].y-1] == playerId &&
-            this._board[winPattern[2].x-1][winPattern[2].y-1]== playerId ){
+        if(this._board[winPatterns[i][0].x-1][winPattern[0].y-1] == player.gamePiece &&
+            this._board[winPattern[1].x-1][winPattern[1].y-1] == player.gamePiece &&
+            this._board[winPattern[2].x-1][winPattern[2].y-1]== player.gamePiece ){
             matches++;
             break;
         }
@@ -97,12 +84,25 @@ GameInstance.prototype.checkScore = function(playerId, next){
 
     if(matches==1){
         console.log("Matches" + matches);
-        next({ playerId: playerId, nextAction:'Player Won'});
+        next({ playerId: player.playerId, nextAction:'Player Won'});
 
 
     }
     else {
         console.log(matches);
-        next({ playerId: playerId, nextAction:'Next Player'} );
+        next({ playerId: player.playerId, nextAction:'Next Player'} );
     }
 };
+
+GameInstance.prototype.startGame = function (player2, next) {
+    this.player2 = player2;
+    this._gameState = "Player1 Turn";
+
+    //set up board state
+
+
+    console.log(this._board);
+
+    next(this);
+};
+

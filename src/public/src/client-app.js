@@ -1,7 +1,7 @@
 ///turn counter changes the state of the board for the odd user and even user
 var turnsPlayed = 0;
 var player = 0;
-
+var serverSocketId;
 
 var gamePiece = '';
 var opponentGamePiece = '';
@@ -14,40 +14,48 @@ socket.on('connect', function (playerNum) {
 });
 
 socket.on('gameFound', function (data) {
-
     player = data.playerNum;
     gameIdentifier = data.gameId;
+    serverSocketId = data.serverSocket;
 
-
-    if (player == 1){
+    if (player == 1) {
         gamePiece = 'X';
         opponentGamePiece = 'O';
-    }else {
+    } else {
         gamePiece = 'O';
         opponentGamePiece = 'X';
         startGame();
-        socket.emit('startGame', { gameId: gameIdentifier} );
+        socket.emit('startGame', {gameId: gameIdentifier});
     }
 
     console.log("game id for this user= " + gameIdentifier);
 });
 
-socket.on('startGame', function()
-{
+socket.on('startGame', function () {
     startGame();
 });
+startGame = function () {
+    $('#welcome').hide();
+    $('#board').show();
+
+    if (player == 1)
+        unlockPage();
+    else
+        lockPage();
+
+    console.log('ran startGame');
+};
+
 
 //hook buttons to emit events.
 socket.on('nextPlayer', function (data) {
     turnsPlayed++;
 
-    console.log(turnsPlayed);
-    if(turnsPlayed == 9){
+    if (turnsPlayed == 9) {
         showTieGame();
-
     }
 
-    if (data.playerId == socket.id)
+    if (data.playerId == serverSocketId)
         return;
 
     updateUI(data.col, data.row, opponentGamePiece);
@@ -56,14 +64,29 @@ socket.on('nextPlayer', function (data) {
 });
 
 
-socket.on("playerWon", function(data){
-    alert("playerWon");
-    showPlayerWon(data.playerId);
-    if (data.playerId == socket.id)
+socket.on("playerWon", function (data) {
+
+    showPlayerWon(data);
+
+    if (data.playerId == serverSocketId)
         return;
 
     updateUI(data.col, data.row, opponentGamePiece);
 });
+showPlayerWon = function (data) {
+
+    $('#welcome').hide();
+    $('#board').hide();
+
+    console.log(data.playerId);
+
+    if (serverSocketId == data.playerId) {
+        $('#win').show();
+    }
+    else {
+        $('#lose').show();
+    }
+};
 
 playTurn = function (x, y) {
     if (!uiEnabled)
@@ -79,41 +102,21 @@ playTurn = function (x, y) {
 
     turnsPlayed++;
 
-
-    console.log("play Turn data" + data);
-
     socket.emit('playTurn', data);
 
     updateUI(x, y, gamePiece);
     lockPage();
 };
 
-showTieGame = function(){
+showTieGame = function () {
     $('#welcome').hide();
     $('#board').hide();
     $('#tie').show();
 
     socket.emit("tieGame", gameIdentifier);
-
 };
 
 socket.on("showTieGame", showTieGame);
-
-showPlayerWon = function(playerId){
-    $('#welcome').hide();
-    $('#board').hide();
-
-    if(playerId == 1){
-        $('#won').show();
-    }
-    else
-    {
-        $('#lose').show();
-    }
-
-
-}
-
 
 updateUI = function (x, y, piece) {
     var key = "#c" + y + "_" + x;
@@ -131,19 +134,6 @@ unlockPage = function () {
 
 getImageUrl = function (gamePiece) {
     return '/img/' + gamePiece + '.png';
-};
-
-
-startGame = function () {
-    $('#welcome').hide();
-    $('#board').show();
-
-    if(player == 1)
-        unlockPage();
-    else
-        lockPage();
-
-    console.log('ran startGame');
 };
 
 

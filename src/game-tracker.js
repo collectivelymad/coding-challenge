@@ -40,8 +40,7 @@
 
                 games[game.gameId] = game;
 
-                var data = {playerNum: playerNum, gameId: game.gameId};
-
+                var data = {playerNum: playerNum, gameId: game.gameId, serverSocket:socket.id};
 
 
                 socket.join(game.gameId, function () {
@@ -49,10 +48,6 @@
                     //console.log(data);
                 });
 
-
-                //socket.contents = 'test';
-                //socket.broadcast.to(game.gameId).emit("startGame", {gameId: game.gameId, player1: game.player1, player2: game.player2, board: game.board});
-                //console.log("ran on newPlayer server");
             });
 
             socket.on("finishGame", gameTracker.finishGame);
@@ -60,15 +55,13 @@
             socket.on('playTurn', function (data) {
                 //function to update game board
                 games[data.gameId].playTurn(data, socket.id, function (action) {
-                    //function to broadcast
-
-                        if (action.nextAction == "Player Won") {
-                            console.log("player Won");
-                            socket.broadcast.to(data.gameId).broadcast.emit("playerWon", data);
-                        } else if (action.nextAction == "Next Player") {
-                            console.log("Next Player");
-                            socket.broadcast.to(data.gameId).emit("nextPlayer", data);
-                        }
+                    if (action.nextAction == 'Player Won') {
+                        console.log(data);
+                        io.sockets.in(data.gameId).emit('playerWon', data);
+                    } else if (action.nextAction == 'Next Player') {
+                        console.log("Next Player");
+                        socket.broadcast.to(data.gameId).emit('nextPlayer', data);
+                    }
                 });
             });
 
@@ -77,7 +70,7 @@
                 //console.log("ran onStartGame" + data.gameId);
             });
 
-            socket.on('tieGame', function(gameIdentifier){
+            socket.on('tieGame', function (gameIdentifier) {
                 socket.broadcast.to(gameIdentifier).emit("showTieGame");
             });
 

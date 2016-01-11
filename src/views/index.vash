@@ -7,17 +7,17 @@
         </div>
         <div class="container title" id="win">
             <div class="jumbotron largetext">
-                You Win
+                You Win <br> <a href="" >Play Again</a>
             </div>
         </div>
         <div class="container title" id="lose">
             <div class="jumbotron largetext">
-                You Lose
+                You Lose  <br> <a href="" >Play Again</a>
             </div>
         </div>
         <div class="container title" id="tie">
             <div class="jumbotron largetext">
-                Cat’s game (Tie)
+                Cat’s game (Tie) <br> <a href="" >Play Again</a>
             </div>
         </div>
         <div class="container" id="board">

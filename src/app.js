@@ -15,7 +15,6 @@ var port = process.env.PORT || 8080;
 
 var io = require('socket.io')(http);
 
-
 var mongoCS = 'mongodb://tictac_user:tictactoe123@ds039185.mongolab.com:39185/md_tictactoe';
 
 mongoose.connect(mongoCS);
